@@ -26,7 +26,7 @@ async function run() {
     await client.connect();
 
     const toyCollection= client.db("toysDB").collection('toy')
-
+    
     app.get('/toy',async(req,res)=>{
         const data=req.body;
         console.log(data);
@@ -43,6 +43,15 @@ async function run() {
       // const email=req.params.email;
       const result= await toyCollection.find({sellerEmail:req.params.email}).toArray();
       res.send(result)
+    })
+    app.get('/toy/:category',async(req,res)=>{
+      // const email=req.params.email;
+      const result= await toyCollection.find({category:req.params.category}).toArray();
+      res.send(result)
+    })
+    app.put('/myToys/:id',(req,res)=>{
+      const toysBody=req.body;
+      
     })
     app.delete('/myToys/:id',async(req,res)=>{
       const id =req.params.id;
